@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:socialchat/models/user.dart';
 import 'package:socialchat/pages/edit_profile.dart';
+import 'package:socialchat/pages/create_user.dart';
 
 import 'package:socialchat/pages/home.dart';
 import 'package:socialchat/widgets/header.dart';
@@ -10,7 +12,9 @@ import 'package:socialchat/widgets/progress.dart';
 import 'package:socialchat/widgets/progress.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+
 class Profile extends StatefulWidget {
+
   final String? profileId;
   Profile({this.profileId});
   @override
@@ -18,7 +22,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  // final String currentUserId = currentUser?.id;
+  // final String currentUserId = currentUserId?.id;
   String postView = "grid";
   bool isLoading = false;
   int postCount = 0;
@@ -68,7 +72,8 @@ class _ProfileState extends State<Profile> {
   }
 
   BuildProfileHeader() async{
-    DocumentSnapshot<dynamic> documentSnapshot = await usersRef.doc(id).get();
+    DocumentSnapshot<dynamic> documentSnapshot = await usersRef.doc(User?.id).get();
+    
     return FutureBuilder(
         future: usersRef.doc(widget.profileId).get(),
         builder: (context, snapshot) {
